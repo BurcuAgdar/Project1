@@ -1,0 +1,48 @@
+{% extends "layout2.html" %}
+ {% block title %}
+<title>Öğretmen</title>
+{% endblock %}  
+
+{% block body %}
+
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+  <div class="container">
+    <h3>Hoşgeldin Öğretmen , {{name}}</h3>
+    <hr>
+    <h3>Öğrenciler</h3>
+    {% if contentS %}
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">İsim</th>
+      <th scope="col">Soyisim</th>
+      <th scope="col">Sınıf</th>
+      <th scope="col">Okul</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for i  in contentS %}
+    <tr>
+      <th scrope="row">{{i.name}}</th>
+      <td>{{i.surname}}</td>
+      <td>{{i.classId}}</td>
+      <td>{{i.schoolId}}</td>
+      <td><a href="/teacher/updateStudent/{{i.id}}" class="btn btn-danger">Güncelle</a>
+      <td><a href="/teacher/deleteStudent/{{i.id}}" class="btn btn-danger">Sil</a>
+    </tr>
+      {% endfor %} 
+  </tbody>
+</table>
+  
+  {% else %} 
+   <div class="alert alert-danger" >
+    Henüz öğrenciniz bulunmuyor...
+  </div>
+
+  {% endif %} 
+
+
+
+{% endblock %}

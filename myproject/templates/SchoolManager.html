@@ -1,0 +1,92 @@
+{% extends "layout2.html" %}
+ {% block title %}
+<title>Müdür</title>
+{% endblock %} 
+
+
+{% block body %}
+<h2> Hoşgeldin Müdür, {{name}}</h2>
+<hr>
+<div class="row">
+  <div class="col-6">  
+  <form method = "post">
+    {% csrf_token %}
+    <h3>Öğretmenler</h3>
+    {% if contentT %}
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Numara</th>
+      <th scope="col">İsim</th>
+      <th scope="col">Soyisim</th>
+      <th scope="col">Sınıf</th>
+      <th scope="col">Okul</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for i  in contentT %}
+    <tr>
+    <th scrope="row">{{i.id}}</th>
+      <td>{{i.name}}</td>
+      <td>{{i.surname}}</td>
+      <td>{{i.classId}}</td>
+      <td>{{i.schoolId}}</td>
+      <td><a href="../../manager/update/{{i.id}}" class="btn btn-danger">Güncelle</a>
+      <td><a href="../../manager/delete/{{i.id}}" class="btn btn-danger">Sil</a>
+    </tr>
+      {% endfor %} 
+  </tbody>
+</table>
+{% else %} 
+
+  <div class="alert alert-danger" >
+    Henüz öğretmeniniz bulunmuyor...
+  </div>
+
+  {% endif %} 
+    </form>
+    </div>
+
+
+  <div class="col-6">
+    <form method = "post">
+    {% csrf_token %}
+    <h3>Öğrenciler</h3>
+    {% if contentS %}
+    
+    
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Numara</th>
+      <th scope="col">İsim</th>
+      <th scope="col">Soyisim</th>
+      <th scope="col">Sınıf</th>
+      <th scope="col">Okul</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for i  in contentS %}
+    <tr>
+      <th scrope="row">{{i.id}}</th>
+      <td>{{i.name}}</td>
+      <td>{{i.surname}}</td>
+      <td>{{i.classId}}</td>
+      <td>{{i.schoolId}}</td>
+      <td><a href="/manager/updateStudent/{{i.id}}" class="btn btn-danger">Güncelle</a>
+      <td><a href="/manager/deleteStudent/{{i.id}}" class="btn btn-danger">Sil</a>
+    </tr>
+      {% endfor %} 
+  </tbody>
+</table>
+    
+  {% else %} 
+
+  <div class="alert alert-danger" >
+    Henüz öğrenciniz bulunmuyor...
+  </div>
+
+  {% endif %} 
+</form>
+</div>
+{% endblock %}
